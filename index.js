@@ -1,19 +1,27 @@
 var express = require('express');
+const path = require('path');
 var router = express.Router();
+const bodyParser = require('body-parser');
 
 // require maria.js 
 const maria = require('./maria');
+
+const jsonParser = bodyParser.json();
+router.use(express.json()); 
+router.use(express.urlencoded({ extended: false }));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+/*
 router.get('/create', function(req, res) {
-  maria.query('CREATE TABLE DEPARTMENT ('
-	+'DEPART_CODE INT(11) NOT NULL,'
-	+'NAME VARCHAR(200) NULL DEFAULT NULL COLLATE utf8mb3_general_ci,'
-	+'PRIMARY KEY (DEPART_CODE) USING BTREE)', function(err, rows, fields) {
+  maria.query('CREATE TABLE BOARD ('
+	+'TITLE VARCHAR(200) NOT NULL,'
+	+'NAME VARCHAR(200) NULL ,'
+  +'CONTENTS VARCHAR(200) NULL ,'
+	+'PRIMARY KEY (TITLE, NAME));', function(err, rows, fields) {
     if(!err) {
       res.send(rows); // responses send rows
     } else {
@@ -22,11 +30,14 @@ router.get('/create', function(req, res) {
     }
   });
 });
+*/
 
 router.get('/drop', function(req, res) {
-  maria.query('DROP TABLE DEPARTMENT', function(err, rows, fields) {
+  maria.query('DROP TABLE BOARD', function(err, rows, fields) {
     if(!err) {
       res.send(rows); // responses send rows
+      
+      
     } else {
       console.log("err : " + err);
       res.send(err);  // response send err
@@ -34,8 +45,19 @@ router.get('/drop', function(req, res) {
   });
 });
 
-router.get('/insert', function(req, res) {
-  maria.query('INSERT INTO DEPARTMENT(DEPART_CODE,NAME) VALUES(5001,"ENGLISH")', function(err, rows, fields) {
+
+
+router.post('/insert', jsonParser, function(req, res) {
+
+  const sql = 'INSERT INTO BOARD VALUES(?,?,?)';
+  
+  const title = req.body.title;
+  const writer = req.body.writer;
+  const content = req.body.content;
+  const params = [title, writer, content];
+
+  console.log(title);
+  maria.query(sql, params, function(err, rows, fields) {
     if(!err) {
       res.send(rows); // responses send rows
     } else {
@@ -46,7 +68,7 @@ router.get('/insert', function(req, res) {
 });
 
 router.get('/select', function(req, res) {
-  maria.query('SELECT * FROM DEPARTMENT', function(err, rows, fields) {
+  maria.query('SELECT * FROM BOARD', function(err, rows, fields) {
     if(!err) {
       res.send(rows); // responses send rows
     } else {
@@ -68,7 +90,7 @@ router.get('/update', function(req, res) {
 });
 
 router.get('/delete', function(req, res) {
-  maria.query('DELETE FROM DEPARTMENT WHERE DEPART_CODE=5001', function(err, rows, fields) {
+  maria.query('DELETE FROM BOARD WHERE DEPART_CODE=5001', function(err, rows, fields) {
     if(!err) {
       res.send(rows); // responses send rows
     } else {
