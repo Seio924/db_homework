@@ -9,6 +9,7 @@ const maria = require('./maria');
 const jsonParser = bodyParser.json();
 router.use(express.json()); 
 router.use(express.urlencoded({ extended: false }));
+router.use(express.static("views"));
 
 /* GET home page. */
 router.get('/', function(req, res, next) {

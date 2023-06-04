@@ -64,7 +64,8 @@ a {
 }
 
 .board_write .title,
-.board_write .info {
+.board_write .info,
+.board_write .cont {
     padding: 15px;
 }
 
@@ -84,17 +85,26 @@ a {
     vertical-align: middle;
 }
 
+.board_write .cont dl {
+    display: inline-block;
+    width: 50%;
+    vertical-align: middle;
+}
+
 .board_write .title dt,
 .board_write .title dd,
 .board_write .info dt,
-.board_write .info dd {
+.board_write .info dd,
+.board_write .cont dt,
+.board_write .cont dd {
     display: inline-block;
     vertical-align: middle;
     font-size: 1.4rem;
 }
 
 .board_write .title dt,
-.board_write .info dt {
+.board_write .info dt,
+.board_write .cont dt {
     width: 100px;
 }
 
@@ -113,11 +123,7 @@ a {
     width: 80%;
 }
 
-.board_write .cont {
-    border-bottom: 1px solid #000;
-}
-
-.board_write .cont textarea {
+.board_write .cont input[type="text"] {
     display: block;
     width: 100%;
     height: 300px;
@@ -125,4 +131,8 @@ a {
     box-sizing: border-box;
     border: 0;
     resize: vertical;
+}
+
+.board_write .cont {
+    border-bottom: 1px solid #000;
 }

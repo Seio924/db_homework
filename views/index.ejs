@@ -3,12 +3,29 @@
     <head>
         <title>test</title>
         <meta charset="utf-8">
+        <link rel="stylesheet" href="./style.css">
     </head>
     <body>
         <form action="/insert" method="post">
-            이름 : <input type="text" name="title"><br>
-            학번 : <input type="text" name="writer"><br>
-            학과 : <input type="text" name="content"><br>
-            <input type="submit">
+            <div class="board_wrap">
+                <div class="board_title">
+                    <strong>글 작성</strong>
+                </div>
+                <div class="board_write_wrap">
+                    <div class="board_write">
+                        <div class="title">
+                            <input type="text" name="title" placeholder="제목 입력" required>
+                        </div>
+                        <div class="info">
+                            <input type="text" name="writer" placeholder="글쓴이 입력" required>
+                        </div>
+                        <div class="cont">
+                            <input type="text" name="content" placeholder="내용 입력" required>
+                        </div>
+                    </div>
+                    <div class="bt_wrap">
+                        <input type="submit">
+                    </div>
+                </div>
         </form>
     </body>
