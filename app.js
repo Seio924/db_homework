@@ -25,6 +25,10 @@ app.get('/', (req, res) => {
     res.render('index');
 });
 
+app.get('/insert', (req, res) => {
+    res.render('board_ui');
+});
+
 app.post('/post', (req, res) => {
     const sql = 'INSERT INTO BOARD VALUES(?,?,?)';
   
@@ -33,15 +37,15 @@ app.post('/post', (req, res) => {
     const content = req.body.content;
     const params = [title, writer, content];
 
-  console.log(title);
-  maria.query(sql, params, function(err, rows, fields) {
-    if(!err) {
-      res.send(rows); // responses send rows
-    } else {
-      console.log("err : " + err);
-      res.send(err);  // response send err
-    }
-  });
+    console.log(title);
+    maria.query(sql, params, function(err, rows, fields) {
+        if(!err) {
+        res.send(rows); // responses send rows
+        } else {
+        console.log("err : " + err);
+        res.send(err);  // response send err
+        }
+    });
 });
 /*
 const info = {
