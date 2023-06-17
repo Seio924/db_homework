@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>공지사항</title>
+    <link rel="stylesheet" href="./select_ui.css">
+</head>
+<body>
+    <form action="/com_insert" method="post">
+        <div class="board_wrap">
+            <div class="board_title">
+                <strong>글 조회</strong>
+            </div>
+            <div class="board_view_wrap">
+                <div class="board_view">
+                    <div class="title">
+                        <%= s_title %>
+                    </div>
+                    <div class="info">
+                        <dl>
+                            <dt>글쓴이</dt>
+                            <dd><%= s_writer %></dd>
+                        </dl>
+                        <dl>
+                            <dt>작성일</dt>
+                            <dd><%= s_dt %></dd>
+                        </dl>
+                        <dl>
+                            <dt>고유번호</dt>
+                            <dd><input type="text" name="c_num" style="border: none; background: transparent;" readonly value=<%= s_num %>></dd>
+                        </dl>
+                    </div>
+                    <div class="cont">
+                        <%= s_content %>
+                    </div>
+                </div>
+                
+                <div class="bt_wrap">
+                    <a href="/" class="on">목록</a>
+                    <a href=<%= "/delete?num=" + s_num %>>게시글 삭제</a>
+                </div>
+                <div><br><br><br>
+                    <h1>댓글</h1>
+                    <% for (var i = 0; i < count; i++){ %>
+                        <br>
+                        <div><h2><%= com[0][i] %>: <%= com[1][i] %> <%= com[2][i] %></h2></div>
+                        <a href=<%= "/com_delete?com_num=" + com[3][i] + "&num=" + s_num %>>댓글 삭제</a>
+                        <br>
+                    <%}%>
+                    <br><br><br>
+                    <dt>댓글 쓰기</dt>
+                    <dd><input type="text" name="c_writer" placeholder="작성자"> <input type="text" name="c_content" placeholder="내용"> <input type="submit" value="작성"></dd>
+                </div>
+            </div>
+        </div>
+    </form>
+</body>
+</html>

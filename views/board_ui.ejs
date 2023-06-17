@@ -23,21 +23,21 @@
                 <div>
                     <% for (var i = 1; i <= count; i++){ %>
                         <div class="num"><%= p_num+i %></div>
-                        <div class="title"><a href=<%= "/update?title=" + row[0][i-1] + "?writer=" + row[1][i-1] + "?dt=" + row[3][i-1] %>><%= row[0][i-1] %></a></div>
+                        <div class="title"><a href=<%= "/select?title=" + row[0][i-1].replace(' ','%20') + "&writer=" + row[1][i-1].replace(' ','%20') + "&dt=" + row[3][i-1].replace(' ','%20') %>><%= row[0][i-1] %></a></div>
                         <div class="writer"><%= row[1][i-1] %></div>
                         <div class="date"><%= row[3][i-1] %></div>
                     <%}%>
                 </div>
             </div>
             <div class="board_page">
-                <a href=<%= prev %>>이전페이지</a>
-                <a href=<%= next %>>다음페이지</a>
+                <h2><a href=<%= prev %>>이전페이지</a> <a href=<%= next %>>다음페이지</a></h2>
+                
+            </div>
+            <div class="bt_wrap">
+                <a href="/write_board" class="on">글 쓰기</a>
             </div>
             </div>
         </div>        
     </div>
-    <form action="/write_board">
-        <input type="submit">
-    </form>
 </body>
 </html> 
